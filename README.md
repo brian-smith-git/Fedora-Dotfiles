@@ -1,4 +1,4 @@
-# Brian Smith's Fedora 42 Workstation Dotfiles
+# Brian Smith's Fedora Workstation Dotfiles
 
 This repository contains my **personal dotfiles and configurations** for a professional development environment on **Fedora 42 Workstation**.  
 
