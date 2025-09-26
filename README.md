@@ -2,7 +2,7 @@
 
 This repository contains my **personal dotfiles and configurations** for a professional development environment on **Fedora 42 Workstation**.  
 
-It’s designed for developers and creators who want a **fast, organized, and reproducible setup** with **Zsh, Powerlevel10k, Neovim, Tmux**, and GPU-accelerated terminal emulators like **Kitty** or **Alacritty**.
+It’s designed for developers and creators who want a **fast, organized, and reproducible setup** with **Zsh, Powerlevel10k, Neovim, Tmux**, fastfetch on startup, and GPU-accelerated terminal emulators like **Kitty** or **Alacritty**.
 
 ---
 
