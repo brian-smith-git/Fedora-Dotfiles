@@ -35,6 +35,11 @@ plugins=(
   history-substring-search
 )
 
+# Fastfetch on terminal startup
+if command -v fastfetch >/dev/null 2>&1; then
+    fastfetch
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # Syntax highlighting MUST be sourced last
@@ -66,3 +71,4 @@ mkcd() { mkdir -p "$1" && cd "$1"; }
 # --- Safety ---
 setopt NO_CLOBBER   # prevent accidental overwrite with >
 alias config='/usr/bin/git --git-dir=/home/briansmith/.dotfiles/ --work-tree=/home/briansmith'
+
