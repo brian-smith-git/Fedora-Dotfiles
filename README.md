@@ -1,53 +1,59 @@
-# Brian Smith Fedora 43 Developer Setup
+# 🧠 Brian Smith's Fedora 43 Developer Setup
 
 ![Fedora Logo](https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg)
 
+---
+
 ## 🚀 Overview
 
-This repository provides an **interactive installer** for setting up a **complete Fedora 43 developer environment**.  
-The goal is to quickly set up a modern, fully functional development system optimized for productivity, terminal efficiency, and coding convenience.
+This repository provides an **interactive installer** for configuring a **complete Fedora 43 developer environment**.  
+It’s designed for **speed, productivity, and terminal efficiency**, offering both **modular** and **full system setups**.
 
 ---
 
-## 🛠 Features
+## 🧩 Key Features
 
-The installer can optionally install each category or perform a **full setup**, including:
-
-| Category | What it includes | Where files/configs are stored |
-|----------|-----------------|-------------------------------|
-| **Essential Packages** | git, zsh, curl, wget, vim, tmux, ripgrep, fd-find, fzf, htop, bat, exa | Installed system-wide via `dnf` |
-| **GUI Packages** | Common GUI apps (editors, browsers, utilities) | Installed via `dnf` or `flatpak` |
-| **Flatpak Apps** | Flatpak versions of apps | `/var/lib/flatpak` for system-wide, `$HOME/.local/share/flatpak` for user |
-| **Zsh + Powerlevel10k** | Zsh shell + Powerlevel10k prompt | `$HOME/.zshrc`, `$HOME/.p10k.zsh` |
-| **Neovim Config** | Custom Neovim configuration | `$HOME/.config/nvim/init.vim` or `$HOME/.config/nvim/init.lua` |
-| **Tmux Config** | Tmux configuration | `$HOME/.tmux.conf` |
-| **Extras & Productivity Tools** | fzf, bat, htop, exa, ripgrep, fd-find | Installed system-wide via `dnf` |
-| **Language Managers & SDKs** | pyenv, rbenv, nvm | Installed under `$HOME/.pyenv`, `$HOME/.rbenv`, `$HOME/.nvm` |
-| **Container Tools** | Podman, Docker Compose | Installed system-wide via `dnf` |
-| **Terminal Enhancements** | Fastfetch on startup, persistent history | Fastfetch added to `$HOME/.zshrc`, history managed via `$HOME/.zsh_history` |
+| Category | Description | Config / Install Location |
+|-----------|--------------|----------------------------|
+| **Essential Packages** | Core CLI tools (`git`, `zsh`, `curl`, `vim`, etc.) | Installed system-wide via `dnf` |
+| **GUI Packages** | Desktop productivity apps (editors, browsers, utilities) | Installed via `dnf` or `flatpak` |
+| **Flatpak Apps** | Flatpak-managed desktop apps | `/var/lib/flatpak` (system) / `$HOME/.local/share/flatpak` (user) |
+| **Zsh + Powerlevel10k** | Modern shell setup with theme and prompt customization | `$HOME/.zshrc`, `$HOME/.p10k.zsh` |
+| **Neovim Config** | Custom developer-ready Neovim configuration | `$HOME/.config/nvim/init.lua` or `init.vim` |
+| **Tmux Config** | Terminal multiplexer configuration | `$HOME/.tmux.conf` |
+| **Extras & Productivity Tools** | Includes `fzf`, `exa`, `ripgrep`, `bat`, `htop`, `fd-find` | Installed system-wide via `dnf` |
+| **Language Managers** | `pyenv`, `rbenv`, `nvm` for Python, Ruby, Node.js | `$HOME/.pyenv`, `$HOME/.rbenv`, `$HOME/.nvm` |
+| **Container Tools** | Podman, Docker Compose | Installed via `dnf` |
+| **Terminal Enhancements** | `fastfetch`, persistent history | Configured in `$HOME/.zshrc` and `$HOME/.zsh_history` |
 
 ---
 
-## 🎯 Usage
+## ⚙️ Installation Guide
 
-### 1. Clone the repository
+### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/brian-smith-git/Fedora-Dotfiles.git
 cd Fedora-Dotfiles
 
-2. Make the installer executable
+
+---
+
+2️⃣ Make the Installer Executable
 
 chmod +x install.sh
 
-3. Run the installer
+
+---
+
+3️⃣ Run the Installer
 
 ./install.sh
 
-The installer will show an interactive menu:
+You’ll see an interactive menu like this:
 
 =======================================
-Brian Smith Fedora 43 Dev Installer
+ Brian Smith's Fedora 43 Dev Installer
 =======================================
 Select what to install:
   1) Essential Packages
@@ -63,43 +69,65 @@ Select what to install:
  11) Quit
 =======================================
 
-Choose the option you want to install, or 10 for a full setup.
-4. Powerlevel10k Setup
+➡️ Choose the option(s) you want — or select 10 for a full developer setup.
 
-If you installed Zsh + Powerlevel10k, start a new terminal and run:
+
+---
+
+🧠 Post-Install Configuration
+
+⚡ Powerlevel10k Setup
+
+After installing Zsh + Powerlevel10k, open a new terminal and run:
 
 zsh
 
-This will launch the Powerlevel10k setup wizard, allowing you to configure your prompt interactively.
-5. Fastfetch and History
+The Powerlevel10k wizard will guide you through prompt customization interactively.
 
-    Fastfetch will display system information whenever a terminal is opened. This is automatically added to your $HOME/.zshrc.
 
-    Zsh history persistence is enabled, storing commands in $HOME/.zsh_history for future sessions.
+---
 
-6. File Locations
+🖥️ Fastfetch & History
 
-All configuration and installer files are stored as follows:
+Fastfetch automatically runs on terminal launch to display system info.
+↳ Configured in $HOME/.zshrc.
 
-    install.sh – main installer script
+Persistent Zsh history is enabled.
+↳ Commands are stored in $HOME/.zsh_history for future sessions.
 
-    README.md – documentation
 
-    $HOME/.zshrc – Zsh configuration including Fastfetch and history settings
 
-    $HOME/.p10k.zsh – Powerlevel10k prompt configuration
+---
 
-    $HOME/.config/nvim/ – Neovim configuration
+📂 File Structure & Config Paths
 
-    $HOME/.tmux.conf – Tmux configuration
+File / Directory	Purpose
 
-    Language managers (pyenv, rbenv, nvm) – stored in user home directories
+install.sh	Main interactive installer script
+README.md	Project documentation
+$HOME/.zshrc	Zsh configuration + Fastfetch integration
+$HOME/.p10k.zsh	Powerlevel10k theme configuration
+$HOME/.config/nvim/	Neovim configuration files
+$HOME/.tmux.conf	Tmux configuration
+$HOME/.pyenv / .rbenv / .nvm	Language managers and SDKs
 
-💡 Notes
 
-    You can rerun the installer at any time to install additional packages.
 
-    The full install option exits automatically after finishing — no need to manually select "Quit".
+---
 
-    This setup is optimized for Fedora 43 and is suitable for developers of all skill levels.
+💡 Notes & Tips
 
+You can rerun the installer anytime to add or update specific packages.
+
+The “Full Install” option completes all setup steps and exits automatically.
+
+Optimized for Fedora 43, but most configurations are forward-compatible with newer releases.
+
+Suitable for developers of all levels — from fresh setups to advanced workstations.
+
+
+
+---
+
+🧑‍💻 Maintained by: Brian Smith
+🌐 Repository: Fedora-Dotfiles
