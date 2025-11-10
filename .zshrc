@@ -1,4 +1,63 @@
 # -------------------------------------------------
+# Zsh configuration for briansmith (Fedora 43)
+# -------------------------------------------------
+
+# --- Powerlevel10k instant prompt (must be first) ---
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# --- Environment ---
+export EDITOR="nvim"
+export VISUAL="nvim"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export PATH="$HOME/.local/bin:$PATH"
+
+# --- History (privacy + efficiency) ---
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=20000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+
+# --- Oh My Zsh ---
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  history-substring-search
+  sudo
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# --- Fastfetch on terminal startup ---
+if command -v fastfetch >/dev/null 2>&1; then
+    fastfetch
+fi
+
+# --- Aliases ---
+alias ll='ls -la --color=auto'
+alias gs='git status'
+alias gp='git pull'
+alias update='sudo dnf upgrade --refresh -y && flatpak update -y'
+alias cls='clear'
+
+# --- Starship prompt (optional, modern replacement for P10K) ---
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+fi
+
+# --- Source syntax highlighting last ---
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# -------------------------------------------------
 # Zsh configuration for briansmith (Fedora 42)
 # -------------------------------------------------
 
