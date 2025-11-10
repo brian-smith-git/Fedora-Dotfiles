@@ -1,100 +1,34 @@
-# 🐧 Fedora 43 Dotfiles & Dev Setup
+# Brian Smith Fedora 43 Dev Setup
 
-**Brian Smith’s Fedora 43 Developer Workstation**  
-Fully automated dotfiles, tools, and configs for a **fast, efficient, and modern development environment**.
-
----
-
-## 🚀 Features
-
-### Terminal & Shell
-- **Zsh** with **Oh My Zsh**  
-- **Powerlevel10k** prompt for a beautiful, informative terminal  
-- Persistent terminal history and command sharing across sessions  
-- Plugins: `zsh-autosuggestions`, `zsh-syntax-highlighting`  
-- **fastfetch** runs on terminal startup for instant system info  
-
-### Essential Tools
-- CLI: `git`, `curl`, `wget`, `vim`, `tmux`, `neovim`, `stow`, `ripgrep`, `fd-find`, `fzf`, `htop`, `bat`, `exa`, `tree`, `neofetch`  
-- GUI: `kitty`, `alacritty`, `firefox`  
-
-### Productivity Apps
-- Flatpak apps: **VSCode**, **Spotify**, **Slack**  
-
-### Developer Configs
-- Neovim: `~/.config/nvim`  
-- Tmux: `~/.tmux.conf`  
-- Zsh: `~/.zshrc` + `.p10k.zsh`  
-
-### Language & SDK Managers
-- Python: `pyenv`  
-- Node.js: `nvm`  
-- Rust: `rustup`  
-
-### Containers
-- Docker (enabled and running)  
-- Podman  
+> Streamlined Fedora 43 developer environment setup with an interactive installer. Install only what you need or set up everything with one command. Includes Zsh, Powerlevel10k, Neovim, Tmux, container tools, language managers, and more.  
 
 ---
 
-## ⚡ Installation
+## Features
 
-### 1️⃣ Clone the repository
+- Interactive installer with **Powerlevel10k-style menu**  
+- Automatic setup of essential packages & productivity tools  
+- Zsh + Oh-My-Zsh + Powerlevel10k configured  
+- Persistent shell history & Fastfetch on startup  
+- Neovim & Tmux configuration preloaded  
+- Python, Node, Rust language managers included  
+- Container tools: Docker & Podman  
+- Flatpaks for common GUI apps  
+- “Install Everything” option for full dev environment  
+
+---
+
+## Requirements
+
+- Fedora 43  
+- Sudo privileges  
+
+---
+
+## Installation
 
 ```bash
 git clone https://github.com/brian-smith-git/Fedora-Dotfiles.git
 cd Fedora-Dotfiles
-
-2️⃣ Run the installer
-Interactive Mode
-
+chmod +x install.sh
 ./install.sh
-
-    Follow the menu to choose what to install
-
-    Select All to install everything automatically
-
-Non-Interactive Mode
-
-./install.sh -a
-
-    Installs everything automatically including:
-
-        Terminal setup & Zsh enhancements
-
-        Dev tools & GUI apps
-
-        Language managers & containers
-
-        Productivity apps
-
-⚙️ Post-Installation
-
-    Restart the terminal to start using Zsh with Powerlevel10k
-
-    fastfetch appears automatically at terminal startup
-
-    Source .zshrc if needed:
-
-source ~/.zshrc
-
-💡 Optional Extras
-
-    Docker Compose
-
-    VSCode extensions
-
-    Nerd Fonts for Powerlevel10k symbols
-
-    Database clients (PostgreSQL, MySQL, Redis CLI)
-
-These can be installed manually or integrated into the installer.
-🤝 Contributing
-
-    Fork this repo
-
-    Make improvements
-
-    Open a pull request
-
-Please ensure Fedora 43 compatibility for all changes.
