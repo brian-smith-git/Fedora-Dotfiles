@@ -1,74 +1,100 @@
-# Brian Smith's Fedora Workstation Dotfiles
+# 🐧 Fedora 43 Dotfiles & Dev Setup
 
-This repository contains my personal dotfiles and configurations for a professional development environment on **Fedora 43 Workstation**.
-
-It’s designed for developers and creators who want a fast, organized, and reproducible setup with Zsh, ⚡ **Powerlevel10k**, Neovim, Tmux, fastfetch on startup, and GPU-accelerated terminal emulators like Kitty or Alacritty.
-
----
-
-## Features
-
-### Shell & Productivity
-
-- Zsh with Oh My Zsh
-- ⚡ **Powerlevel10k prompt theme automatically installed and configured**
-- Plugins: autosuggestions, syntax highlighting, completions
-- Custom aliases for:
-  - Git (`gs`, `gc`, `ga`, `gp`, `gl`)
-  - Editing (`v` → nvim)
-  - System updates (`update` → dnf + flatpak)
-- Secure history settings for privacy
-
-### Editor
-
-- Neovim
-  - Line numbers & relative numbers
-  - Expand tabs and shift width configured
-  - Modern defaults for faster coding
-
-### Terminal
-
-- Supports Kitty, Alacritty, and GNOME Terminal
-- GPU-accelerated rendering in Kitty/Alacritty
-- Optional Tmux integration with mouse and scrollback support
-
-### Tmux
-
-- Mouse support enabled
-- History scrollback increased
-- Reloadable configuration
-- Vi-style navigation
-
-### Install Script
-
-- One-command setup for **Fedora 43 systems**
-- Installs essential packages: git, zsh, neovim, tmux, ripgrep, fd, fzf, stow, flatpak
-- Installs optional GUI packages: Alacritty, Kitty, Firefox
-- Sets default shell to Zsh
-- Pulls dotfiles and applies configs automatically
-- Creates backups of existing configs with `.bak` suffix
-- Installs Oh My Zsh and ⚡ **Powerlevel10k if missing**
-- Installs common Flatpak apps from Flathub: VSCode, Spotify, Slack
+**Brian Smith’s Fedora 43 Developer Workstation**  
+Fully automated dotfiles, tools, and configs for a **fast, efficient, and modern development environment**.
 
 ---
 
-## Tracked Dotfiles
+## 🚀 Features
 
-- `~/.zshrc` → Zsh configuration
-- `~/.p10k.zsh` → ⚡ **Powerlevel10k prompt config**
-- `~/.gitconfig` → Git configuration
-- `~/.tmux.conf` → Tmux config
-- `~/.config/nvim/` → Neovim configuration
-- `~/.config/kitty/` or `~/.config/alacritty/` → Terminal configs
-- `install.sh` → Automated setup script
+### Terminal & Shell
+- **Zsh** with **Oh My Zsh**  
+- **Powerlevel10k** prompt for a beautiful, informative terminal  
+- Persistent terminal history and command sharing across sessions  
+- Plugins: `zsh-autosuggestions`, `zsh-syntax-highlighting`  
+- **fastfetch** runs on terminal startup for instant system info  
 
-Other files are ignored to keep the repository clean (history, cache, browser data, etc.).
+### Essential Tools
+- CLI: `git`, `curl`, `wget`, `vim`, `tmux`, `neovim`, `stow`, `ripgrep`, `fd-find`, `fzf`, `htop`, `bat`, `exa`, `tree`, `neofetch`  
+- GUI: `kitty`, `alacritty`, `firefox`  
+
+### Productivity Apps
+- Flatpak apps: **VSCode**, **Spotify**, **Slack**  
+
+### Developer Configs
+- Neovim: `~/.config/nvim`  
+- Tmux: `~/.tmux.conf`  
+- Zsh: `~/.zshrc` + `.p10k.zsh`  
+
+### Language & SDK Managers
+- Python: `pyenv`  
+- Node.js: `nvm`  
+- Rust: `rustup`  
+
+### Containers
+- Docker (enabled and running)  
+- Podman  
 
 ---
 
-## Installation
+## ⚡ Installation
+
+### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/brian-smith-git/Fedora-Dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
+git clone https://github.com/brian-smith-git/Fedora-Dotfiles.git
+cd Fedora-Dotfiles
+
+2️⃣ Run the installer
+Interactive Mode
+
 ./install.sh
+
+    Follow the menu to choose what to install
+
+    Select All to install everything automatically
+
+Non-Interactive Mode
+
+./install.sh -a
+
+    Installs everything automatically including:
+
+        Terminal setup & Zsh enhancements
+
+        Dev tools & GUI apps
+
+        Language managers & containers
+
+        Productivity apps
+
+⚙️ Post-Installation
+
+    Restart the terminal to start using Zsh with Powerlevel10k
+
+    fastfetch appears automatically at terminal startup
+
+    Source .zshrc if needed:
+
+source ~/.zshrc
+
+💡 Optional Extras
+
+    Docker Compose
+
+    VSCode extensions
+
+    Nerd Fonts for Powerlevel10k symbols
+
+    Database clients (PostgreSQL, MySQL, Redis CLI)
+
+These can be installed manually or integrated into the installer.
+🤝 Contributing
+
+    Fork this repo
+
+    Make improvements
+
+    Open a pull request
+
+Please ensure Fedora 43 compatibility for all changes.
