@@ -1,4 +1,4 @@
-# 🧠 Brian Smith Fedora 43 Developer Setup
+# 🧠 Brian Smith's Fedora 43 Developer Setup
 
 ![Fedora Logo](https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg)
 
@@ -84,14 +84,14 @@ This gives the script execution permissions so it can be run directly.
 
 
 
-### 🚀 Step 3: Run the Installer
+🚀 Step 3: Run the Installer
 
 ./install.sh
 
 After launching, an interactive setup menu will appear:
 
 =======================================
- Brian Smith Fedora 43 Dev Installer
+ Brian Smith's Fedora 43 Dev Installer
 =======================================
 Select what to install:
   1) Essential Packages
