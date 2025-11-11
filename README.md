@@ -118,7 +118,7 @@ Select one or more categories — or choose 10 for a full installation.
 
 After installation, start a new terminal and launch Zsh:
 
-zsh or p10k
+zsh or p10k configure 
 
 This opens the Powerlevel10k configuration wizard, allowing you to personalize your prompt’s icons, colors, and layout.
 
