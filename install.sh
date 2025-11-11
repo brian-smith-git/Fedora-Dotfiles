@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =======================================
-# Brian Smith Fedora 43 Dev Setup Installer
+# Brian Smith's Fedora 43 Dev Setup Installer
 # =======================================
 
 # Colors
