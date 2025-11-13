@@ -9,7 +9,7 @@
 
 🚀 Overview
 
-This repository is my personal Fedora setup It’s designed for speed, productivity, and terminal efficiency and complete system setups.  
+This repository is my personal Fedora setup It’s designed for speed, productivity, and terminal efficiency and complete system setups. 
 Ideal for developers who want a pre-configured, professional Linux workspace out of the box.
 
 
@@ -47,7 +47,7 @@ Ideal for developers who want a pre-configured, professional Linux workspace out
 
 ## 💡 Notes & Recommendations
 
-- You can rerun the installer** anytime to add or update components.  
+- You can rerun the installer anytime to add or update components.  
 - The "Full Install”option automatically installs everything and exits when complete.  
 - Designed for Fedora 43.  
 - Suitable for developers seeking a clean, powerful environment.
