@@ -1,6 +1,3 @@
-# -------------------------------------------------
-# Zsh configuration for briansmith (Fedora 43)
-# -------------------------------------------------
 
 # --- Powerlevel10k instant prompt (must be first) ---
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -57,9 +54,6 @@ fi
 # --- Source syntax highlighting last ---
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# -------------------------------------------------
-# Zsh configuration for briansmith (Fedora 42)
-# -------------------------------------------------
 
 # --- Powerlevel10k instant prompt (must be first) ---
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
