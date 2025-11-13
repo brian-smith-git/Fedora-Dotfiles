@@ -1,6 +1,3 @@
-# -------------------------------------------------
-# Powerlevel10k configuration for Fedora 43
-# -------------------------------------------------
 
 # Disable configuration wizard (you already configured)
 typeset -g POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
