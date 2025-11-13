@@ -1,24 +1,20 @@
-# 🧠 Brian Smith's Fedora 43 Developer Setup
+# Brian Smith's Fedora 43 personal Developer Setup
 
 ![Fedora Logo](https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg)
 
-[![Fedora](https://img.shields.io/badge/Fedora-43-blue?logo=fedora&logoColor=white&style=flat-square)](https://getfedora.org/)
-[![License](https://img.shields.io/github/license/brian-smith-git/Fedora-Dotfiles?style=flat-square)](LICENSE)
 [![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
-[![Maintainer](https://img.shields.io/badge/Maintainer-Brian%20Smith-lightgrey?style=flat-square)](https://github.com/brian-smith-git)
 
 
 
-## 🚀 Overview
 
-This repository provides an **interactive installer** for setting up a **modern Fedora 43 developer environment**.  
-It’s designed for **speed, productivity, and terminal efficiency**, offering both **modular** and **complete** system setups.  
+🚀 Overview
 
+This repository is my personal Fedora setup It’s designed for speed, productivity, and terminal efficiency and complete system setups.  
 Ideal for developers who want a pre-configured, professional Linux workspace out of the box.
 
 
 
-## 🧩 Key Features
+🧩 Key Features
 
 | Category | Description | Config / Install Location |
 |-----------|--------------|----------------------------|
@@ -51,10 +47,10 @@ Ideal for developers who want a pre-configured, professional Linux workspace out
 
 ## 💡 Notes & Recommendations
 
-- You can **rerun the installer** anytime to add or update components.  
-- The **“Full Install”** option automatically installs everything and exits when complete.  
-- Designed for **Fedora 43**, but compatible with newer releases.  
-- Suitable for **beginners** and **advanced developers** seeking a clean, powerful environment.
+- You can rerun the installer** anytime to add or update components.  
+- The "Full Install”option automatically installs everything and exits when complete.  
+- Designed for Fedora 43.  
+- Suitable for developers seeking a clean, powerful environment.
 
 
 
@@ -64,7 +60,7 @@ Follow these steps to install and configure your Fedora 43 development environme
 
 
 
-### 🧭 Step 1: Clone the Repository
+🧭 Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/brian-smith-git/Fedora-Dotfiles.git
@@ -75,7 +71,7 @@ This creates a local copy of the project on your system.
 
 
 
-## ⚙️ Step 2: Make the Installer Executable
+⚙️ Step 2: Make the Installer Executable
 
 chmod +x install.sh
 
@@ -112,7 +108,7 @@ Select one or more categories — or choose 10 for a full installation.
 
 
 
-## 🧠 After-Installation Configuration
+🧠 After-Installation Configuration
 
 ⚡ Powerlevel10k Setup
 
@@ -137,7 +133,7 @@ These features are enabled automatically after installation.
 
 
 
-### ✅ After Installation
+✅ After Installation
 
 Once setup completes, your Fedora 43 system will include:
 
@@ -154,18 +150,9 @@ Installed language managers (pyenv, rbenv, nvm)
 Fully configured Podman and Docker Compose for containers
 
 
-You can start customizing your environment or rerun the installer anytime to add more components.
 
 
 
-
-👨‍💻 Maintainer
-
-Maintained by: Brian Smith
-Repository: Fedora-Dotfiles
 License: MIT
 
 
-
-
-⭐ If you find this setup useful, consider starring the repository to support future updates!
