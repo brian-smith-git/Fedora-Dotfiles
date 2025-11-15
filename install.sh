@@ -75,4 +75,4 @@ install_zsh() {
         sed -i 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|' $HOME/.zshrc
     fi
 
-    # Launch Zsh for Powerlevel
+ 
