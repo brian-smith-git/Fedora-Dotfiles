@@ -1,10 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# =======================================
-# Brian Smith's Dev Installer
-# =======================================
-
-# Colors
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
@@ -12,9 +7,6 @@ MAGENTA='\033[0;35m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-# -------------------------------
-# ASCII Header
-# -------------------------------
 echo -e "${MAGENTA}${BOLD}
  ____  _       _               ____  _ _       _       
 | __ )| | ___ | |_ ___  ___   / ___|| (_) __ _| | ___  
@@ -24,106 +16,167 @@ echo -e "${MAGENTA}${BOLD}
                                          |___/        
 ${NC}"
 
-echo -e "${CYAN}${BOLD}Interactive Brian Smith's Dev Installer${NC}\n"
+echo -e "${CYAN}${BOLD}Interactive Brian Smith's Dev Installer (safer)${NC}\n"
 
-# -------------------------------
-# Functions for each section
-# -------------------------------
+# Ensure we are on Fedora-like system with dnf
+if ! command -v dnf &>/dev/null; then
+    echo -e "${YELLOW}dnf not found. This installer expects a Fedora/RHEL-based system.${NC}"
+    echo -e "${YELLOW}Aborting.${NC}"
+    exit 1
+fi
 
-# Check if a package is installed
-is_package_installed() {
-    rpm -q "$1" &>/dev/null
-    return $?
+# Ensure sudo exists
+if ! command -v sudo &>/dev/null; then
+    echo -e "${YELLOW}sudo not found. Please run this as root or install sudo.${NC}"
+    exit 1
+fi
+
+# Helper: install a package if the given command is missing
+install_if_missing() {
+    local cmd="$1"       # command to check, e.g., git
+    local pkg="$2"       # package name to install via dnf (can be same as cmd)
+    if command -v "$cmd" &>/dev/null; then
+        echo -e "${CYAN}Command '$cmd' found; skipping install of '$pkg'.${NC}"
+        return 0
+    fi
+
+    echo -e "${CYAN}Attempting to install package '$pkg' (command '$cmd' missing)...${NC}"
+    if sudo dnf install -y "$pkg"; then
+        echo -e "${GREEN}Installed $pkg${NC}"
+        return 0
+    else
+        echo -e "${YELLOW}Failed to install $pkg via dnf. You may need to install it manually.${NC}"
+        return 1
+    fi
 }
 
-# Install essential packages
+# Install essential packages (checks commands first)
 install_essentials() {
     echo -e "${GREEN}${BOLD}Installing Essential Packages...${NC}"
-    for package in git zsh curl wget vim tmux ripgrep fd-find fzf htop bat; do
-        if ! is_package_installed $package; then
-            echo -e "${CYAN}Installing $package...${NC}"
-            sudo dnf install -y $package
+
+    # Map command -> package (pkg may be adjusted if command differs from package name)
+    declare -A map=(
+        [git]=git
+        [zsh]=zsh
+        [curl]=curl
+        [wget]=wget
+        [vim]=vim
+        [tmux]=tmux
+        [rg]=ripgrep       # command 'rg' provided by 'ripgrep'
+        [fd]=fd-find       # fallback package name; if this is wrong for your Fedora, edit it
+        [fzf]=fzf
+        [htop]=htop
+        [bat]=bat
+    )
+
+    # Friendly loop: check for several possible commands (rg -> ripgrep, fd -> fd or fdfind)
+    for cmd in "${!map[@]}"; do
+        pkg="${map[$cmd]}"
+
+        # special handling for some commands that have different binary names
+        if [ "$cmd" = "rg" ]; then
+            # check 'rg' binary (ripgrep)
+            install_if_missing "rg" "$pkg"
+        elif [ "$cmd" = "fd" ]; then
+            # fd sometimes installs binary 'fd' or 'fdfind'
+            if command -v fd &>/dev/null || command -v fdfind &>/dev/null; then
+                echo -e "${CYAN}fd or fdfind already present; skipping.${NC}"
+            else
+                install_if_missing "fd" "$pkg"
+            fi
         else
-            echo -e "${CYAN}Package $package is already installed.${NC}"
+            install_if_missing "$cmd" "$pkg"
         fi
     done
 }
 
-# Install Zsh + Powerlevel10k
 install_zsh() {
     echo -e "${GREEN}${BOLD}Installing Zsh + Powerlevel10k...${NC}"
-    if ! is_package_installed zsh; then
-        echo -e "${CYAN}Installing Zsh...${NC}"
-        sudo dnf install -y zsh
-    else
-        echo -e "${CYAN}Zsh is already installed.${NC}"
-    fi
+    install_if_missing zsh zsh
 
-    # Install Oh My Zsh if not installed
+    # Install Oh My Zsh non-interactively (do not auto-run zsh or change shell)
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
-        echo -e "${CYAN}Installing Oh My Zsh...${NC}"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        echo -e "${CYAN}Installing Oh My Zsh (non-interactive)...${NC}"
+        export RUNZSH=no
+        export CHSH=no
+        export KEEP_ZSHRC=yes
+        # installer supports --unattended flag
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || {
+            echo -e "${YELLOW}Warning: Oh My Zsh installer failed or returned non-zero. Continuing.${NC}"
+        }
     else
         echo -e "${CYAN}Oh My Zsh is already installed.${NC}"
     fi
 
-    # Install zsh-autosuggestions if not installed
+    # zsh-autosuggestions plugin
     if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
         echo -e "${CYAN}Installing zsh-autosuggestions plugin...${NC}"
-        git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        git clone https://github.com/zsh-users/zsh-autosuggestions "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" || true
     else
         echo -e "${CYAN}zsh-autosuggestions is already installed.${NC}"
     fi
 
-    # Install Powerlevel10k Theme if not installed
+    # Powerlevel10k Theme
     if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
         echo -e "${CYAN}Installing Powerlevel10k theme...${NC}"
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-        # Set the theme in .zshrc
-        sed -i 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|' $HOME/.zshrc
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" || true
     else
         echo -e "${CYAN}Powerlevel10k theme is already installed.${NC}"
+    fi
+
+    # Safely update .zshrc: if exists, change ZSH_THEME line; otherwise create a basic .zshrc
+    if [ -f "$HOME/.zshrc" ]; then
+        if grep -q '^ZSH_THEME=' "$HOME/.zshrc"; then
+            sed -i 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|' "$HOME/.zshrc" || true
+        else
+            echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >> "$HOME/.zshrc"
+        fi
+    else
+        echo -e "${CYAN}.zshrc not found; creating a minimal one.${NC}"
+        cat > "$HOME/.zshrc" <<'EOF'
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+EOF
     fi
 
     echo -e "${CYAN}Powerlevel10k and Zsh setup complete.${NC}"
 }
 
-# Install Neovim + config
 install_nvim() {
     echo -e "${GREEN}${BOLD}Installing Neovim + config...${NC}"
-    if ! is_package_installed neovim; then
-        echo -e "${CYAN}Installing Neovim...${NC}"
-        sudo dnf install -y neovim
-    else
-        echo -e "${CYAN}Neovim is already installed.${NC}"
-    fi
-    mkdir -p $HOME/.config/nvim
-    # Assuming you have a nvim/init.vim in the repo, copy it to the user's config folder
-    cp ./nvim/init.vim $HOME/.config/nvim/init.vim 2>/dev/null || true
+    install_if_missing nvim neovim
+    mkdir -p "$HOME/.config/nvim"
+    cp ./nvim/init.vim "$HOME/.config/nvim/init.vim" 2>/dev/null || true
 }
 
-# Install tmux + config
 install_tmux() {
     echo -e "${GREEN}${BOLD}Installing Tmux + config...${NC}"
-    if ! is_package_installed tmux; then
-        echo -e "${CYAN}Installing Tmux...${NC}"
-        sudo dnf install -y tmux
-    else
-        echo -e "${CYAN}Tmux is already installed.${NC}"
-    fi
-    # Assuming you have tmux/.tmux.conf in the repo, copy it to the user's home directory
-    cp ./tmux/.tmux.conf $HOME/.tmux.conf 2>/dev/null || true
+    install_if_missing tmux tmux
+    cp ./tmux/.tmux.conf "$HOME/.tmux.conf" 2>/dev/null || true
 }
 
-# Install flatpak apps
 install_flatpaks() {
     echo -e "${GREEN}${BOLD}Installing Flatpak Apps...${NC}"
-    flatpak install -y flathub com.visualstudio.code com.spotify.Client
-}
+    if ! command -v flatpak &>/dev/null; then
+        echo -e "${YELLOW}flatpak not found; installing flatpak...${NC}"
+        sudo dnf install -y flatpak || {
+            echo -e "${YELLOW}Could not install flatpak. Skipping flatpak installs.${NC}"
+            return 1
+        }
+    fi
 
-# -------------------------------
-# Main menu and installer execution
-# -------------------------------
+    # Ensure Flathub remote exists
+    if ! flatpak remote-info flathub &>/dev/null; then
+        echo -e "${CYAN}Adding Flathub remote...${NC}"
+        sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || true
+    fi
+
+    sudo flatpak install -y flathub com.visualstudio.code com.spotify.Client || {
+        echo -e "${YELLOW}flatpak install failed for one or more apps. Continue or install them manually.${NC}"
+    }
+}
 
 options=(
     "Essential Packages"
@@ -144,7 +197,7 @@ while true; do
             3) install_nvim; break ;;
             4) install_tmux; break ;;
             5) install_flatpaks; break ;;
-            6) 
+            6)
                 install_essentials
                 install_zsh
                 install_nvim
