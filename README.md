@@ -63,7 +63,7 @@ Follow these steps to install and configure your Fedora 43 development environme
 🧭 Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/brian-smith-git/Fedora-Dotfiles.git
+git clone https://github.com/brianrsmith1/Fedora-Dotfiles.git
 cd Fedora-Dotfiles
 
 This creates a local copy of the project on your system.
